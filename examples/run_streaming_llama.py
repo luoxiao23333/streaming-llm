@@ -10,6 +10,8 @@ import time
 import re
 import sys
 
+os.environ["TRANSFORMERS_CACHE"] = "/data/hyou37/xluo/streaming-llm/tmp"
+
 from tqdm import tqdm
 from streaming_llm.utils import load, download_url, load_jsonl
 from streaming_llm.enable_streaming_llm import enable_streaming_llm
