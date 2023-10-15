@@ -16,7 +16,6 @@ from tqdm import tqdm
 from streaming_llm.utils import load, download_url, load_jsonl
 from streaming_llm.enable_streaming_llm import enable_streaming_llm
 
-
 @torch.no_grad()
 def greedy_generate(model, tokenizer, input_ids, past_key_values, max_gen_len):
     outputs = model(
@@ -32,7 +31,7 @@ def greedy_generate(model, tokenizer, input_ids, past_key_values, max_gen_len):
         outputs = model(
             input_ids=pred_token_idx,
             past_key_values=past_key_values,
-            use_cache=True,
+            use_cache=True
         )
         past_key_values = outputs.past_key_values
         pred_token_idx = outputs.logits[:, -1, :].argmax(dim=-1).unsqueeze(1)
@@ -50,6 +49,9 @@ def greedy_generate(model, tokenizer, input_ids, past_key_values, max_gen_len):
 
         now = len(generated_text) - 1
         if now > pos:
+            with open("./memory.txt",  "+a") as file:   
+                file.write(f"Memory is {torch.cuda.memory_allocated()/1024/1024/1024} GB\n")
+                file.write(f"Shape is {past_key_values[0][0].shape}")
             print(" ".join(generated_text[pos:now]), end=" ", flush=True)
             pos = now
 
@@ -69,8 +71,11 @@ def streaming_inference(model, tokenizer, prompts, kv_cache=None, max_gen_len=10
         input_ids = input_ids.to(model.device)
         seq_len = input_ids.shape[1]
         if kv_cache is not None:
+            # remain space for encoding{seq_len} and KV in future self-regressive{max_gen_len}
             space_needed = seq_len + max_gen_len
-            past_key_values = kv_cache.evict_for_space(past_key_values, space_needed)
+            # recent window = [past_seq_len-recent_size+input_seq_len+max_gen_len, seq_len]
+            past_key_values = kv_cache.diff_head(past_key_values, space_needed)
+
 
         past_key_values = greedy_generate(
             model, tokenizer, input_ids, past_key_values, max_gen_len=max_gen_len

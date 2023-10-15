@@ -12,6 +12,9 @@ from transformers.models.llama.modeling_llama import (
     rotate_half,
     apply_rotary_pos_emb,
     repeat_kv,
+    LlamaDecoderLayer,
+    LlamaModel,
+    LlamaPreTrainedModel
 )
 import types
 
@@ -35,11 +38,12 @@ def llama_pos_shift_attention_forward(
     position_ids: Optional[torch.LongTensor] = None,
     past_key_value: Optional[Tuple[torch.Tensor]] = None,
     output_attentions: bool = False,
-    use_cache: bool = False,
+    use_cache: bool = False
 ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
     bsz, q_len, _ = hidden_states.size()
 
     if self.config.pretraining_tp > 1:
+        input(f"get you! {self.config.pretraining_tp}")
         key_value_slicing = (
             self.num_key_value_heads * self.head_dim
         ) // self.config.pretraining_tp
@@ -84,10 +88,11 @@ def llama_pos_shift_attention_forward(
 
     kv_seq_len = key_states.shape[-2]
     if past_key_value is not None:
+        #print(kv_seq_len, past_key_value[0].shape)
         kv_seq_len += past_key_value[0].shape[-2]
     cos, sin = self.rotary_emb(value_states, seq_len=kv_seq_len)
     ### Shift Pos: query pos is min(cache_size, idx)
-    # query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin, position_ids)
+    #query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin, position_ids)
     query_states = apply_rotary_pos_emb_single(query_states, cos, sin, position_ids)
     ###
 
@@ -161,14 +166,21 @@ def llama_pos_shift_attention_forward(
     return attn_output, attn_weights, past_key_value
 
 
-def enable_llama_pos_shift_attention(model):
+def enable_llama_pos_shift_attention(model, indexer=None):
+    if indexer is None:
+        from ..utils import UniqueIndexer
+        indexer = UniqueIndexer()
+
     for name, module in reversed(model._modules.items()):
         if len(list(module.children())) > 0:
             enable_llama_pos_shift_attention(
                 module,
+                indexer
             )
 
         if isinstance(module, LlamaAttention):
             model._modules[name].forward = types.MethodType(
                 llama_pos_shift_attention_forward, model._modules[name]
             )
+            model._modules[name].idx = indexer.get_idx()
+

@@ -110,3 +110,12 @@ def load_jsonl(
         for line in f:
             list_data_dict.append(json.loads(line))
     return list_data_dict
+
+
+class UniqueIndexer:
+    def __init__(self):
+        self._unique_head_idx = -1
+
+    def get_idx(self):
+        self._unique_head_idx += 1
+        return self._unique_head_idx

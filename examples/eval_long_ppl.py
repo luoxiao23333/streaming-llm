@@ -1,6 +1,8 @@
 import torch
 from tqdm import tqdm
 import os
+os.environ["TRANSFORMERS_CACHE"] = "/data/hyou37/xluo/streaming-llm/tmp"
+
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from datasets import load_dataset
 from torch.nn import CrossEntropyLoss
