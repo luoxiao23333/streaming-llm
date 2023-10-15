@@ -119,3 +119,14 @@ class UniqueIndexer:
     def get_idx(self):
         self._unique_head_idx += 1
         return self._unique_head_idx
+    
+
+# return gpu mem allocated in GB
+def get_gpu_mem_allocated():
+    cur_gpu = torch.cuda.current_device()
+    mem = 0.
+    for gpu in range(torch.cuda.device_count()):
+        torch.cuda.set_device(gpu)
+        mem += torch.cuda.memory_allocated(gpu)
+    torch.cuda.set_device(cur_gpu)
+    return mem/(1024 ** 3)

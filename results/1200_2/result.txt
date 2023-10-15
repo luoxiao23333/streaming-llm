@@ -1,0 +1,36 @@
+With Model lmsys/vicuna-7b-v1.3, With Method: NotCut
+Seq: 0, Mem: 13.0196 GB, KV Cached: 0.0000 GB, Latency: 0.0814 seconds/word
+Seq: 1, Mem: 13.5650 GB, KV Cached: 0.3853 GB, Latency: 0.0663 seconds/word
+With Model lmsys/vicuna-7b-v1.3, With Method: StreamLLM
+Seq: 0, Mem: 13.0196 GB, KV Cached: 0.0000 GB, Latency: 0.0815 seconds/word
+Seq: 1, Mem: 13.0969 GB, KV Cached: 0.0879 GB, Latency: 0.0753 seconds/word
+With Model lmsys/vicuna-7b-v1.3, With Method: SparseSample
+Seq: 0, Mem: 13.0196 GB, KV Cached: 0.0000 GB, Latency: 0.0808 seconds/word
+Seq: 1, Mem: 13.1851 GB, KV Cached: 0.0254 GB, Latency: 0.0718 seconds/word
+With Model lmsys/vicuna-13b-v1.3, With Method: NotCut
+Seq: 0, Mem: 24.9094 GB, KV Cached: 0.0000 GB, Latency: 0.1046 seconds/word
+Seq: 1, Mem: 25.7062 GB, KV Cached: 0.4448 GB, Latency: 0.1003 seconds/word
+With Model lmsys/vicuna-13b-v1.3, With Method: StreamLLM
+Seq: 0, Mem: 24.9094 GB, KV Cached: 0.0000 GB, Latency: 0.1047 seconds/word
+Seq: 1, Mem: 25.5331 GB, KV Cached: 0.1373 GB, Latency: 0.1212 seconds/word
+With Model lmsys/vicuna-13b-v1.3, With Method: SparseSample
+Seq: 0, Mem: 24.9094 GB, KV Cached: 0.0000 GB, Latency: 0.1047 seconds/word
+Seq: 1, Mem: 25.2740 GB, KV Cached: 0.0244 GB, Latency: 0.1067 seconds/word
+With Model lmsys/vicuna-33b-v1.3, With Method: NotCut
+Seq: 0, Mem: 62.3931 GB, KV Cached: 0.0000 GB, Latency: 0.2807 seconds/word
+Seq: 1, Mem: 65.4334 GB, KV Cached: 1.5324 GB, Latency: 0.3270 seconds/word
+With Model lmsys/vicuna-33b-v1.3, With Method: StreamLLM
+Seq: 0, Mem: 62.3931 GB, KV Cached: 0.0000 GB, Latency: 0.2806 seconds/word
+Seq: 1, Mem: 62.0313 GB, KV Cached: 0.2678 GB, Latency: 0.3268 seconds/word
+With Model lmsys/vicuna-33b-v1.3, With Method: SparseSample
+Seq: 0, Mem: 62.3931 GB, KV Cached: 0.0000 GB, Latency: 0.2806 seconds/word
+Seq: 1, Mem: 61.3445 GB, KV Cached: 0.0550 GB, Latency: 0.2650 seconds/word
+With Model meta-llama/Llama-2-70b-chat-hf, With Method: NotCut
+Seq: 0, Mem: 128.9662 GB, KV Cached: 0.0000 GB, Latency: 0.6115 seconds/word
+Seq: 1, Mem: 129.4748 GB, KV Cached: 0.2551 GB, Latency: 0.6129 seconds/word
+With Model meta-llama/Llama-2-70b-chat-hf, With Method: StreamLLM
+Seq: 0, Mem: 128.9662 GB, KV Cached: 0.0000 GB, Latency: 0.6132 seconds/word
+Seq: 1, Mem: 129.1218 GB, KV Cached: 0.0549 GB, Latency: 0.4389 seconds/word
+With Model meta-llama/Llama-2-70b-chat-hf, With Method: SparseSample
+Seq: 0, Mem: 128.9662 GB, KV Cached: 0.0000 GB, Latency: 0.6132 seconds/word
+Seq: 1, Mem: 128.7767 GB, KV Cached: 0.0070 GB, Latency: 0.4178 seconds/word

@@ -13,15 +13,24 @@ def slice1d(x, start, end):
     return x[:, start:end, ...]
 
 
-def head_diff(x, head_idx):
+def clean_cache():
+    cur_gpu = torch.cuda.current_device()
+    for gpu in range(torch.cuda.device_count()):
+        torch.cuda.set_device(gpu)
+        torch.cuda.empty_cache()
+    torch.cuda.set_device(cur_gpu)
+    return
+
+
+def head_diff(x, head_idx, head_length):
     result = torch.empty(x.shape[0], x.shape[1], 0, x.shape[3], device=x.device, dtype=x.dtype)
     k=0
-    uplimit = (x.shape[2] - 32)
+    head_length = head_length // 3
+    uplimit = (x.shape[2] // head_length) - 3
     while k < uplimit:
-        element = x[:,:,head_idx+k,...].unsqueeze(2)
+        element = x[:,:,head_idx+k*head_length,...].unsqueeze(2)
         result = torch.cat((result, element), dim=2)
-        k += 32
-    del x
+        k += 1
     return result
 
 
@@ -48,6 +57,22 @@ class StartRecentKVCache:
         self.v_seq_dim = v_seq_dim
         self.k_slice = DIM_TO_SLICE[k_seq_dim]
         self.v_slice = DIM_TO_SLICE[v_seq_dim]
+
+
+    def get_method(self, method_str):
+        METHOD_DICT = {
+            "NotCut": self.not_cut,
+            "StreamLLM": self.evict_for_space,
+            "SparseSample": self.diff_head
+        }
+        return METHOD_DICT[method_str]
+    
+    @staticmethod
+    def get_supported_method():
+        return ["NotCut", "StreamLLM", "SparseSample"]
+
+    def not_cut(self, past_key_values, space_needed):
+        return past_key_values
 
     def __call__(self, past_key_values):
         if past_key_values is None:
@@ -76,6 +101,7 @@ class StartRecentKVCache:
             for k, v in past_key_values
         ]
 
+    # Use by streamLLM
     def evict_for_space(self, past_key_values, num_coming):
         if past_key_values is None:
             return None
@@ -108,16 +134,19 @@ class StartRecentKVCache:
             for k, v in past_key_values
         ]
 
+        del past_key_values
+        clean_cache()
+
         return cache
     
-    
+    # Sparse Sample by us
     def diff_head(self, past_key_values, num_coming):
         if past_key_values is None:
             return None
         seq_len = past_key_values[0][0].size(self.k_seq_dim)
 
-        if seq_len + num_coming <= self.cache_size:
-            return past_key_values
+        # if seq_len + num_coming <= self.cache_size:
+            # return past_key_values
         # [(Samples),(K or V),(data)]
         cache = [
             [
@@ -125,7 +154,7 @@ class StartRecentKVCache:
                     [
                         self.k_slice(k, 0, self.start_size),
                         head_diff(
-                            k, head_idx
+                            k, head_idx, len(past_key_values)
                         ),
                     ],
                     dim=self.k_seq_dim,
@@ -134,7 +163,7 @@ class StartRecentKVCache:
                     [
                         self.v_slice(v, 0, self.start_size),
                         head_diff(
-                            v, head_idx
+                            v, head_idx, len(past_key_values)
                         ),
                     ],
                     dim=self.v_seq_dim,
@@ -145,6 +174,8 @@ class StartRecentKVCache:
 
         ##print(f"({len(cache)},{len(cache[0])},{cache[0][0].shape})")
         #input()
+        del past_key_values
+        clean_cache()
         
         return cache
 

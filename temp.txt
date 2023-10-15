@@ -1,0 +1,3 @@
+shape is torch.Size([1, 32, 789, 128]), numel 3231744, ele size 2, tensor num 64
+shape is torch.Size([1, 32, 4, 128]), numel 16384, ele size 2, tensor num 64
+shape is torch.Size([1, 32, 28, 128]), numel 114688, ele size 2, tensor num 64
