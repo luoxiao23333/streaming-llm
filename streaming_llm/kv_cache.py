@@ -110,6 +110,7 @@ class StartRecentKVCache:
         if seq_len + num_coming <= self.cache_size:
             return past_key_values
         # [(Samples),(K or V),(data)]
+        print(f"Trigger Cache! with seq length {seq_len}, num_comming{num_coming}")
         cache = [
             [
                 torch.cat(

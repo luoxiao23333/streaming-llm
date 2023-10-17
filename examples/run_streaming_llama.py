@@ -70,7 +70,7 @@ def streaming_inference(model, tokenizer, prompts, cache_method, kv_cache=None, 
     past_key_values = None
     results = []
     for idx, prompt in enumerate(prompts):
-        if(idx == 2):
+        if(idx == 3):
             break
         prompt = "USER: " + prompt + "\n\nASSISTANT: "
         print("\n" + prompt, end="", file=out)
@@ -120,6 +120,8 @@ def main(args):
 
     out = open("output.txt", "a+")
     out.write(f"With Model: {args.model_name_or_path}, With Method: {args.cache_method}\n")
+    if args.cache_method == "StreamLLM":
+        out.write(f"With Window Size {args.recent_size}\n")
 
     results = streaming_inference(
         model,
@@ -134,6 +136,8 @@ def main(args):
 
     with open("result.txt", "a+") as file:
         file.write(f"With Model {args.model_name_or_path}, With Method: {args.cache_method}\n")
+        if args.cache_method == "StreamLLM":
+            file.write(f"With Window Size {args.recent_size}\n")
         for idx, result in enumerate(results):
             file.write("Seq: {}, Mem: {:.4f} GB, KV Cached: {:.4f} GB, Latency: {:.4f} seconds/word\n".format(idx, result["mem"], result["cache_mem"], result["latency"]))
 
@@ -148,6 +152,7 @@ if __name__ == "__main__":
     parser.add_argument("--start_size", type=int, default=4)
     parser.add_argument("--recent_size", type=int, default=2000)
     parser.add_argument("--cache_method", type=str, choices=StartRecentKVCache.get_supported_method())
+    parser.add_argument("--cache_rate", type=int, default=1)
     args = parser.parse_args()
 
     main(args)

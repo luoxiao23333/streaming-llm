@@ -1,0 +1,12 @@
+With Model meta-llama/Llama-2-70b-chat-hf, With Method: StreamLLM, With Window Size 1000
+Seq: 0, Mem: 128.9204 GB, KV Cached: 0.0000 GB, Latency: 0.4181 seconds/word
+Seq: 1, Mem: 129.0080 GB, KV Cached: 0.0012 GB, Latency: 0.4459 seconds/word
+Seq: 2, Mem: 128.8911 GB, KV Cached: 0.0012 GB, Latency: 0.4033 seconds/word
+With Model meta-llama/Llama-2-70b-chat-hf, With Method: NotCut
+Seq: 0, Mem: 128.9204 GB, KV Cached: 0.0000 GB, Latency: 0.4182 seconds/word
+Seq: 1, Mem: 129.4563 GB, KV Cached: 0.2194 GB, Latency: 0.4999 seconds/word
+Seq: 2, Mem: 129.9216 GB, KV Cached: 0.5334 GB, Latency: 0.4284 seconds/word
+With Model meta-llama/Llama-2-70b-chat-hf, With Method: StreamLLM, With Window Size 2000
+Seq: 0, Mem: 128.9204 GB, KV Cached: 0.0000 GB, Latency: 0.4183 seconds/word
+Seq: 1, Mem: 129.4563 GB, KV Cached: 0.2194 GB, Latency: 0.5000 seconds/word
+Seq: 2, Mem: 129.5171 GB, KV Cached: 0.2985 GB, Latency: 0.4506 seconds/word

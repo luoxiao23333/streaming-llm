@@ -1,0 +1,54 @@
+With Model lmsys/longchat-7b-v1.5-32k, With Method: NotCut
+Seq: 0, Mem: 13.1738 GB, KV Cached: 0.0000 GB, Latency: 0.0871 seconds/word
+Seq: 1, Mem: 14.1723 GB, KV Cached: 0.5063 GB, Latency: 0.0835 seconds/word
+With Model lmsys/longchat-7b-v1.5-32k, With Method: StreamLLM
+Seq: 0, Mem: 13.1738 GB, KV Cached: 0.0000 GB, Latency: 0.0873 seconds/word
+Seq: 1, Mem: 14.0768 GB, KV Cached: 0.4785 GB, Latency: 0.0809 seconds/word
+With Model lmsys/longchat-7b-v1.5-32k, With Method: SparseSample
+Seq: 0, Mem: 13.1738 GB, KV Cached: 0.0000 GB, Latency: 0.0870 seconds/word
+Seq: 1, Mem: 12.8054 GB, KV Cached: 0.0508 GB, Latency: 0.0577 seconds/word
+With Model lmsys/longchat-13b-16k, With Method: NotCut
+Seq: 0, Mem: 25.1024 GB, KV Cached: 0.0000 GB, Latency: 0.1146 seconds/word
+Seq: 1, Mem: 26.3446 GB, KV Cached: 0.6447 GB, Latency: 0.1283 seconds/word
+With Model lmsys/longchat-13b-16k, With Method: StreamLLM
+Seq: 0, Mem: 25.1024 GB, KV Cached: 0.0000 GB, Latency: 0.1146 seconds/word
+Seq: 1, Mem: 26.3446 GB, KV Cached: 0.6447 GB, Latency: 0.1282 seconds/word
+With Model lmsys/longchat-13b-16k, With Method: SparseSample
+Seq: 0, Mem: 25.1024 GB, KV Cached: 0.0000 GB, Latency: 0.1146 seconds/word
+Seq: 1, Mem: 25.3221 GB, KV Cached: 0.0504 GB, Latency: 0.1321 seconds/word
+With Model lmsys/vicuna-7b-v1.3, With Method: NotCut
+Seq: 0, Mem: 13.0196 GB, KV Cached: 0.0000 GB, Latency: 0.0813 seconds/word
+Seq: 1, Mem: 13.5650 GB, KV Cached: 0.3853 GB, Latency: 0.0666 seconds/word
+With Model lmsys/vicuna-7b-v1.3, With Method: StreamLLM
+Seq: 0, Mem: 13.0196 GB, KV Cached: 0.0000 GB, Latency: 0.0808 seconds/word
+Seq: 1, Mem: 13.5650 GB, KV Cached: 0.3853 GB, Latency: 0.0658 seconds/word
+With Model lmsys/vicuna-7b-v1.3, With Method: SparseSample
+Seq: 0, Mem: 13.0196 GB, KV Cached: 0.0000 GB, Latency: 0.0809 seconds/word
+Seq: 1, Mem: 13.2149 GB, KV Cached: 0.0386 GB, Latency: 0.0698 seconds/word
+With Model lmsys/vicuna-13b-v1.3, With Method: NotCut
+Seq: 0, Mem: 24.9094 GB, KV Cached: 0.0000 GB, Latency: 0.1048 seconds/word
+Seq: 1, Mem: 25.7062 GB, KV Cached: 0.4448 GB, Latency: 0.1003 seconds/word
+With Model lmsys/vicuna-13b-v1.3, With Method: StreamLLM
+Seq: 0, Mem: 24.9094 GB, KV Cached: 0.0000 GB, Latency: 0.1047 seconds/word
+Seq: 1, Mem: 25.7062 GB, KV Cached: 0.4448 GB, Latency: 0.1003 seconds/word
+With Model lmsys/vicuna-13b-v1.3, With Method: SparseSample
+Seq: 0, Mem: 24.9094 GB, KV Cached: 0.0000 GB, Latency: 0.1049 seconds/word
+Seq: 1, Mem: 25.2885 GB, KV Cached: 0.0343 GB, Latency: 0.1026 seconds/word
+With Model lmsys/vicuna-33b-v1.3, With Method: NotCut
+Seq: 0, Mem: 62.3931 GB, KV Cached: 0.0000 GB, Latency: 0.2808 seconds/word
+Seq: 1, Mem: 65.4334 GB, KV Cached: 1.5324 GB, Latency: 0.3271 seconds/word
+With Model lmsys/vicuna-33b-v1.3, With Method: StreamLLM
+Seq: 0, Mem: 62.3931 GB, KV Cached: 0.0000 GB, Latency: 0.2811 seconds/word
+Seq: 1, Mem: 64.9121 GB, KV Cached: 1.4580 GB, Latency: 0.3013 seconds/word
+With Model lmsys/vicuna-33b-v1.3, With Method: SparseSample
+Seq: 0, Mem: 62.3931 GB, KV Cached: 0.0000 GB, Latency: 0.2807 seconds/word
+Seq: 1, Mem: 61.9619 GB, KV Cached: 0.0774 GB, Latency: 0.2692 seconds/word
+With Model meta-llama/Llama-2-70b-chat-hf, With Method: NotCut
+Seq: 0, Mem: 128.9662 GB, KV Cached: 0.0000 GB, Latency: 0.6112 seconds/word
+Seq: 1, Mem: 129.4748 GB, KV Cached: 0.2551 GB, Latency: 0.6127 seconds/word
+With Model meta-llama/Llama-2-70b-chat-hf, With Method: StreamLLM
+Seq: 0, Mem: 128.9662 GB, KV Cached: 0.0000 GB, Latency: 0.6118 seconds/word
+Seq: 1, Mem: 129.4748 GB, KV Cached: 0.2551 GB, Latency: 0.6125 seconds/word
+With Model meta-llama/Llama-2-70b-chat-hf, With Method: SparseSample
+Seq: 0, Mem: 128.9662 GB, KV Cached: 0.0000 GB, Latency: 0.6119 seconds/word
+Seq: 1, Mem: 129.0312 GB, KV Cached: 0.0101 GB, Latency: 0.5040 seconds/word

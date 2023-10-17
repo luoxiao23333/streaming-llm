@@ -2,7 +2,7 @@
 Author: Xiao Luo lxiao70@gatech.edu
 Date: 2023-10-15 13:38:33
 LastEditors: Xiao Luo lxiao70@gatech.edu
-LastEditTime: 2023-10-15 16:54:49
+LastEditTime: 2023-10-15 19:16:58
 FilePath: /streaming-llm/test.py
 Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 '''
@@ -19,13 +19,11 @@ model_name_or_paths = [
     "meta-llama/Llama-2-70b-chat-hf",
 ]
 
-
-# 循环遍历组合执行命令
-
-
 for model_name_or_path in model_name_or_paths:
     for cache_method in cache_methods:
-        command = f"TRANSFORMERS_CACHE=tmp CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python examples/run_streaming_llama.py --enable_streaming --model_name_or_path {model_name_or_path} --cache_method {cache_method}"
+        command = f"TRANSFORMERS_CACHE=tmp CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 \
+            python examples/run_streaming_llama.py --enable_streaming\
+                  --model_name_or_path {model_name_or_path} --cache_method {cache_method}"
         print(f"Start to execute {command}")
         
         try:
